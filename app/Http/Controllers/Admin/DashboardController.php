@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ConfirmationLetter;
+use App\Models\Guest;
 use Illuminate\Http\Request;
-use App\Models\PostImage;
 
-class PostImageController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,10 @@ class PostImageController extends Controller
      */
     public function index()
     {
-        //
+        $guests_2022 = Guest::whereYear('created_at', '=', '2022')->count();
+        $arrival_today = ConfirmationLetter::whereDay('arrival', '=', date('d'));
+        $departure_today = ConfirmationLetter::whereDay('departure', '=', date('d'));
+        return view('admin.dashboard.index')->with(compact('guests_2022', 'arrival_today', 'departure_today'));
     }
 
     /**
@@ -36,18 +40,7 @@ class PostImageController extends Controller
      */
     public function store(Request $request)
     {
-        if (empty($request->file('post_image'))) {
-            $post_image = null;
-        } else {
-            $post_image = $request->file('post_image')->store('images/post/cover', 'public');
-        }
-
-        PostImage::create([
-            'post_id' => $request->post_id,
-            'image' => $post_image,
-        ]);
-
-        return redirect()->route('post.show', [$request->post_id])->with('message', 'Image added Successfully');
+        //
     }
 
     /**
@@ -92,8 +85,6 @@ class PostImageController extends Controller
      */
     public function destroy($id)
     {
-        $p = PostImage::find($id);
-        $p->delete();
-        return redirect()->route('post.show', [$p->post_id])->with('message', 'Image deleted Successfully');
+        //
     }
 }

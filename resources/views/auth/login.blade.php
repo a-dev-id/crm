@@ -59,7 +59,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login | adminPANEL</title>
+    <title>Login | NandiniPANEL</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('vendors/adminlte') }}/plugins/fontawesome-free/css/all.min.css">
@@ -71,7 +71,7 @@
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="{{ asset('vendors/adminlte') }}/index2.html" class="h1"><b>admin</b>PANEL</a>
+                <a href="{{ asset('vendors/adminlte') }}/index2.html" class="h1"><b>Nandini</b>PANEL</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
