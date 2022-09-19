@@ -21,7 +21,7 @@ class Guest extends Model
 
     public function ConfirmationLetter()
     {
-        return $this->hasMany(ConfirmationLetter::class);
+        return $this->hasMany(ConfirmationLetter::class, 'guest_id', 'id');
     }
 }
 

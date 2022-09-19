@@ -23,7 +23,7 @@ class ConfirmationLetter extends Model
 
     public function GuestDetail()
     {
-        return $this->belongsTo(Guest::class);
+        return $this->belongsTo(Guest::class, 'guest_id', 'id');
     }
 
     public function VillaDetail()

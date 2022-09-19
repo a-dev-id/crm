@@ -17,8 +17,8 @@ class DashboardController extends Controller
     public function index()
     {
         $guests_2022 = Guest::whereYear('created_at', '=', '2022')->count();
-        $arrival_today = ConfirmationLetter::whereDay('arrival', '=', date('d'));
-        $departure_today = ConfirmationLetter::whereDay('departure', '=', date('d'));
+        $arrival_today = ConfirmationLetter::whereDay('arrival', '=', date('d'))->get();
+        $departure_today = ConfirmationLetter::whereDay('departure', '=', date('d'))->get();
         return view('admin.dashboard.index')->with(compact('guests_2022', 'arrival_today', 'departure_today'));
     }
 

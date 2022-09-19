@@ -37,7 +37,17 @@
 <script src="{{ asset('vendors/adminlte') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script>
     $(function() {
-            $("#list").DataTable({
+            $("#arrival").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#list_wrapper .col-md-6:eq(0)');
+        });
+</script>
+<script>
+    $(function() {
+            $("#departure").DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
@@ -52,7 +62,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
+                <div class="col-3">
                     <div class="info-box">
                         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
                         <div class="info-box-content">
@@ -70,83 +80,77 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">
-
-                    @if (session('message'))
-                    <div class="alert alert-success alert-dismissible" id="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="far fa-times-circle text-white"></i></button>
-                        <h5><i class="icon fas fa-check"></i> Success!</h5>
-                        {{ session('message') }}
-                    </div>
-                    @endif
-
+                <div class="col-6">
                     <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title font-weight-bold">Arrival Today</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
                         <div class="card-body">
-                            <table id="list" class="table table-bordered table-striped">
+                            <table id="arrival" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Title</th>
-                                        <th style="width: 200px">Status</th>
-                                        <th style="width: 150px"></th>
+                                        <th>Full name</th>
+                                        <th>Arrival</th>
+                                        <th>Departure</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($arrival_today as $data)
                                     <tr>
-                                        <td>{{ $data->title }}</td>
-                                        <td>
-                                            @if ($data->status == '1')
-                                            <span class="badge badge-success"><i class="fas fa-check-circle"></i> Published</span>
-                                            @else
-                                            <span class="badge badge-secondary"><i class="fas fa-minus-circle"></i> Draft</span>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="{{ route('food.show', [$data->id]) }}" class="btn btn-sm btn-info">
-                                                <i class="fas fa-images"></i>
-                                            </a>
-                                            <a href="{{ route('food.edit', [$data->id]) }}" class="btn btn-sm btn-warning">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_delete_{{ $data->id }}">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-
-                                            <div class="modal fade" id="modal_delete_{{ $data->id }}">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header bg-danger">
-                                                            <h4 class="modal-title"><i class="fas fa-exclamation-triangle"></i> Warning!</h4>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">×</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body text-left">
-                                                            Are you sure want to delete this <strong>"{{ $data->title }}"</strong> ?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fas fa-ban"></i> Cancel</button>
-                                                            <form method="POST" action="{{ route('food.destroy', [$data->id]) }}">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                        </td>
+                                        <td>{{ $data->GuestDetail->title }} {{ $data->GuestDetail->name }}</td>
+                                        <td>{{ date('d M Y', strtotime($data->arrival)) }}</td>
+                                        <td>{{ date('d M Y', strtotime($data->departure)) }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Status</th>
-                                        <th></th>
+                                        <th>Full name</th>
+                                        <th>Arrival</th>
+                                        <th>Departure</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title font-weight-bold">Departure Today</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="departure" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Full name</th>
+                                        <th>Arrival</th>
+                                        <th>Departure</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($departure_today as $data)
+                                    <tr>
+                                        <td>{{ $data->GuestDetail->title }} {{ $data->GuestDetail->name }}</td>
+                                        <td>{{ date('d M Y', strtotime($data->arrival)) }}</td>
+                                        <td>{{ date('d M Y', strtotime($data->departure)) }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Full name</th>
+                                        <th>Arrival</th>
+                                        <th>Departure</th>
                                     </tr>
                                 </tfoot>
                             </table>
