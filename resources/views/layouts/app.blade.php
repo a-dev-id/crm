@@ -66,6 +66,24 @@
                                     </a>
                                 </li>
 
+                                <li class="nav-item">
+                                    <a href="{{ route('guest.index') }}" class="nav-link @yield('guest_active')">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <span>
+                                            Guest
+                                        </span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{ route('confirmation-letter.index') }}" class="nav-link @yield('confirmation_letter_active')">
+                                        <i class="nav-icon fas fa-envelope-open-text"></i>
+                                        <span>
+                                            Confirmation Letter
+                                        </span>
+                                    </a>
+                                </li>
+
                             </ul>
                         </nav>
                     </div>
