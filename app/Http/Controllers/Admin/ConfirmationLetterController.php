@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ConfirmationLetter;
 use App\Models\Guest;
+use App\Models\Villa;
 use Illuminate\Http\Request;
 
 class ConfirmationLetterController extends Controller
@@ -17,7 +18,8 @@ class ConfirmationLetterController extends Controller
     public function index()
     {
         $guests = Guest::all();
-        return view('admin.confirmation-letter.index')->with(compact('guests'));
+        $villas = Villa::all();
+        return view('admin.confirmation-letter.index')->with(compact('guests', 'villas'));
     }
 
     /**
@@ -38,7 +40,18 @@ class ConfirmationLetterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ConfirmationLetter::create([
+            'guest_id' => $request->guest_id,
+            'confirmation_no' => $request->confirmation_no,
+            'arrival' => $request->arrival,
+            'departure' => $request->departure,
+            'adult' => $request->adult,
+            'child' => $request->child,
+            'villa_id' => $request->villa_id,
+            'currency' => $request->currency,
+            'price' => $request->price,
+        ]);
+        return redirect()->route('confirmation-letter.index');
     }
 
     /**

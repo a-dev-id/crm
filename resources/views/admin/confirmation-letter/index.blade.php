@@ -71,7 +71,8 @@
 
     <section class="content">
         <div class="container-fluid">
-            <form class="row" action="" method="POST">
+            <form method="POST" action="{{ route('confirmation-letter.store') }}" enctype="multipart/form-data" class="row">
+                @csrf
                 <div class="col-8">
                     <div class="card">
                         <div class="card-header">
@@ -90,7 +91,18 @@
                                 <label>Villa Type</label>
                                 <select name="villa_id" class="form-control" required>
                                     <option>- choose -</option>
+                                    @foreach ($villas as $data)
+                                    <option value="{{ $data->id }}">{{ $data->title }}</option>
+                                    @endforeach
                                 </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Currency</label>
+                                <input name="currency" type="text" class="form-control" placeholder="Type something" required>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Price</label>
+                                <input name="price" type="text" class="form-control" placeholder="Type something" required>
                             </div>
                             <div class="form-group col-6">
                                 <label>Arrival</label>
@@ -143,7 +155,7 @@
                             </select>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success">Send</button>
+                            <button type="submit" class="btn btn-primary">PREVIEW</button>
                         </div>
                     </div>
                 </div>

@@ -11,14 +11,14 @@ class ConfirmationLetter extends Model
 
     protected $fillable = [
         'guest_id',
-            'confirmation_no',
-            'arrival',
-            'departure',
-            'adult',
-            'child',
-            'villa_id',
-            'currency',
-            'price',
+        'confirmation_no',
+        'arrival',
+        'departure',
+        'adult',
+        'child',
+        'villa_id',
+        'currency',
+        'price',
     ];
 
     public function GuestDetail()

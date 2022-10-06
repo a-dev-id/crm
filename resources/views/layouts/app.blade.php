@@ -76,6 +76,15 @@
                                 </li>
 
                                 <li class="nav-item">
+                                    <a href="{{ route('villa.index') }}" class="nav-link @yield('villa_active')">
+                                        <i class="nav-icon fas fa-home"></i>
+                                        <span>
+                                            Villa
+                                        </span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
                                     <a href="{{ route('confirmation-letter.index') }}" class="nav-link @yield('confirmation_letter_active')">
                                         <i class="nav-icon fas fa-envelope-open-text"></i>
                                         <span>
