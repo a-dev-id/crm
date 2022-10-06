@@ -17,7 +17,7 @@ class ConfirmationLetterController extends Controller
      */
     public function index()
     {
-        $guests = Guest::all();
+        $guests = Guest::where('status', '=', '1')->get();
         $villas = Villa::all();
         return view('admin.confirmation-letter.index')->with(compact('guests', 'villas'));
     }

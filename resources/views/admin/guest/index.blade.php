@@ -87,7 +87,6 @@
                                         <th>Phone</th>
                                         <th>Country</th>
                                         <th>Date of Birth</th>
-                                        <th>Status</th>
                                         @if(Auth::user()->email == "admin@admin.com")
                                         <th></th>
                                         @else
@@ -103,8 +102,6 @@
                                         <td>{{ $data->country }}</td>
                                         <td>
                                             {{ date('d M Y', strtotime($data->date_of_birth)) }}
-                                        <td>
-                                            @if($data->status == '1') Subscribed @else Unsubscribed @endif
                                         </td>
                                         @if(Auth::user()->email == "admin@admin.com")
                                         <td class="text-center">
@@ -154,7 +151,6 @@
                                         <th>Phone</th>
                                         <th>Country</th>
                                         <th>Date of Birth</th>
-                                        <th>Status</th>
                                         @if(Auth::user()->email == "admin@admin.com")
                                         <th></th>
                                         @else
