@@ -93,6 +93,15 @@
                                     </a>
                                 </li>
 
+                                {{-- <li class="nav-item">
+                                    <a href="{{ route('setting.index') }}" class="nav-link @yield('setting_active')">
+                                        <i class="nav-icon fas fa-cogs"></i>
+                                        <span>
+                                            Setting
+                                        </span>
+                                    </a>
+                                </li> --}}
+
                             </ul>
                         </nav>
                     </div>

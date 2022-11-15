@@ -7,6 +7,8 @@ use App\Models\ConfirmationLetter;
 use App\Models\Guest;
 use App\Models\Villa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmationLetterMail;
 
 class ConfirmationLetterController extends Controller
 {
@@ -51,6 +53,29 @@ class ConfirmationLetterController extends Controller
             'currency' => $request->currency,
             'price' => $request->price,
         ]);
+
+        $guest = Guest::where('id', '=', $request->guest_id)->first();
+        $villa = Villa::where('id', '=', '8')->first();
+
+        $data = [
+            'full_name' => $guest->title.'. '.$guest->name,
+            'confirmation_no' => $request->confirmation_no,
+            'arrival' => $request->arrival,
+            'departure' => $request->departure,
+            'adult' => $request->adult,
+            'child' => $request->child,
+            'currency' => $request->currency,
+            'price' => $request->price,
+            'villa_title' => $villa->title,
+            'villa_image' => $villa->image,
+            'villa_wide' => $villa->wide,
+            'villa_pool_type' => $villa->pool_type,
+            'villa_view' => $villa->view,
+            'villa_description' => $villa->description,
+        ];
+
+        Mail::to($guest->email)->cc('angga@hanginggardensinternational.com')->send(new ConfirmationLetterMail($data));
+
         return redirect()->route('confirmation-letter.index');
     }
 

@@ -28,4 +28,9 @@ Route::resource('/', App\Http\Controllers\Admin\DashboardController::class);
 Route::resource('guest', App\Http\Controllers\Admin\GuestController::class);
 Route::resource('confirmation-letter', App\Http\Controllers\Admin\ConfirmationLetterController::class);
 Route::resource('villa', App\Http\Controllers\Admin\VillaController::class);
+Route::resource('setting', App\Http\Controllers\Admin\SettingController::class);
+
+Route::get('/email', function () {
+    return view('email.confirmation-letter');
+});
 });
